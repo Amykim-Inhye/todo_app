@@ -1,13 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, Text, View } from 'react-native'
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
+import { Homepage } from './src/screens'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  let [fontsLoaded] = useFonts({
+    Montserrat_Semibold: require('./assets/fonts/Montserrat-SemiBold.ttf'),
+  })
+
+  if (!fontsLoaded) {
+    return <AppLoading />
+  } else {
+    return <Homepage />
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +24,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
